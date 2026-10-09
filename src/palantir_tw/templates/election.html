@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ e.name }}{% endblock %}
+{% block content %}
+<h1>{{ e.name }}</h1>
+{% for district_id, cands in districts %}
+<section class="district">
+  <h2>{{ cands[0].district.name }}</h2>
+  <table>
+    <tr><th>號次</th><th>候選人</th><th>政黨</th><th>得票數</th><th>得票率</th><th>結果</th></tr>
+    {% for c in cands | sort(attribute='votes', reverse=True) %}
+    <tr class="{{ 'elected' if c.elected }}">
+      <td>{{ c.ballot_no }}</td>
+      <td><a href="/entities/{{ c.person_id }}">{{ c.person.name }}</a></td>
+      <td>{{ c.party.name if c.party else '無黨籍' }}</td>
+      <td>{{ '{:,}'.format(c.votes) if c.votes is not none }}</td>
+      <td>{{ '%.2f%%'|format(c.vote_share) if c.vote_share is not none }}</td>
+      <td>{{ '當選' if c.elected else '' }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+{% endfor %}
+{% endblock %}

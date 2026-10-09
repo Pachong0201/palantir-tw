@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>本体概览</h1>
+<div class="cards">
+  <a class="card" href="/search?q="><b>{{ counts.person }}</b><span>人物</span></a>
+  <a class="card" href="/api/parties"><b>{{ counts.party }}</b><span>政党</span></a>
+  <a class="card" href="/api/entities?type=district"><b>{{ counts.district }}</b><span>县市</span></a>
+  <a class="card" href="/api/elections"><b>{{ counts.election }}</b><span>选举场次</span></a>
+  <a class="card" href="/api/entities?type=document"><b>{{ counts.document }}</b><span>文档</span></a>
+</div>
+<p class="hint">API: <code>/api/entities</code> <code>/api/elections</code> <code>/api/districts/{id}/candidacies</code></p>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}palantir-tw{% endblock %} · 台湾开源情报平台</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="/" class="brand">palantir-tw</a>
+  <form action="/search" method="get">
+    <input name="q" value="{{ q or '' }}" placeholder="搜实体：人名 / 政党 / 县市">
+  </form>
+</nav>
+<main>
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>搜尋「{{ q }}」 <small>{{ results|length }} 筆</small></h1>
+<table>
+  <tr><th>類型</th><th>名稱</th><th>external_id</th></tr>
+  {% for r in results %}
+  <tr>
+    <td>{{ r.type }}</td>
+    <td><a href="/entities/{{ r.id }}">{{ r.name }}</a></td>
+    <td><code>{{ r.external_id }}</code></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

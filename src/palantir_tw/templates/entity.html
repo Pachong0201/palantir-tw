@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ e.name }}{% endblock %}
+{% block content %}
+<h1>{{ e.name }} <span class="tag">{{ e.type }}</span></h1>
+{% if e.props %}<pre class="props">{{ e.props | tojson(indent=2) }}</pre>{% endif %}
+
+{% if candidacies %}
+<h2>参选记录</h2>
+<table>
+  <tr><th>选举</th><th>职务</th><th>选区</th><th>政党</th><th>号次</th><th>得票</th><th>得票率</th><th>结果</th></tr>
+  {% for c in candidacies %}
+  <tr class="{{ 'elected' if c.elected }}">
+    <td>{{ c.election.name }}</td>
+    <td>{{ c.office }}</td>
+    <td>{{ c.district.name }}</td>
+    <td>{{ c.party.name if c.party else '無黨籍' }}</td>
+    <td>{{ c.ballot_no }}</td>
+    <td>{{ '{:,}'.format(c.votes) if c.votes is not none }}</td>
+    <td>{{ '%.2f%%'|format(c.vote_share) if c.vote_share is not none }}</td>
+    <td>{{ '當選' if c.elected else '' }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}
