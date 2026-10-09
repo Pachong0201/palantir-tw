@@ -1,0 +1,19 @@
+# palantir-tw: Python 3.10+ FastAPI + SQLAlchemy
+initialize: |
+  python3 -m venv .venv
+  .venv/bin/pip install -e ".[dev]"
+maintenance: |
+  .venv/bin/pip install -e ".[dev]"
+knowledge:
+  - name: test
+    contents: |
+      .venv/bin/python -m pytest
+  - name: serve
+    contents: |
+      .venv/bin/palantir-tw serve --port 8000
+  - name: seed
+    contents: |
+      .venv/bin/palantir-tw seed-cec-2022   # 下载中选会数据包(~110MB)并导入
+  - name: notes
+    contents: |
+      PALANTIR_TW_DATABASE_URL 默认 sqlite:///./data/palantir_tw.db；Windows 部署见 deploy/windows.md
